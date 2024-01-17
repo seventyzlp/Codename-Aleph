@@ -129,6 +129,7 @@
     <ClCompile Include="Unreal\Plugins\AirSim\Source\UnrealSensors\UnrealSensorFactory.cpp" />
     <ClCompile Include="unreal\plugins\airsim\source\VehicleCameraConnector.cpp" />
     <ClCompile Include="Unreal\Plugins\AirSim\Source\VehicleSimApi.cpp" />
+    <ClCompile Include="Unreal\Plugins\AirSim\Source\Vehicles\Multirotor\MultirotorPawnSimApi.cpp" />
     <ClCompile Include="Unreal\Plugins\AirSim\Source\Weather\WeatherLib.cpp" />
     <ClCompile Include="Unreal\Plugins\AirSim\Source\WorldSimApi.cpp" />
   </ItemGroup>

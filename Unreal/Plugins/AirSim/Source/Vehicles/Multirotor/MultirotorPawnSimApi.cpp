@@ -183,3 +183,25 @@ MultirotorPawnSimApi::UpdatableObject* MultirotorPawnSimApi::getPhysicsBody()
     return multirotor_physics_body_->getPhysicsBody();
 }
 //*** End: UpdatableState implementation ***//
+
+std::string MultirotorPawnSimApi::getRecordFileLine(bool is_header_line) const 
+{
+    std::string common_line = PawnSimApi::getRecordFileLine(is_header_line);
+    if (is_header_line) {
+        return "VehicleName\tTimeStamp\tPOS_X\tPOS_Y\tPOS_Z\tQ_W\tQ_X\tQ_Y\tQ_Z\tLuminance\t";
+    }
+    const auto* kinematics = getGroundTruthKinematics();
+    const uint64_t timestamp_millis = static_cast<uint64_t>(clock()->nowNanos() / 1.0E6);
+    const auto& luminance_data = vehicle_api_->getLuminanceSensorData("");
+
+    std::ostringstream ss;
+    ss << getVehicleName() << "\t";
+    ss << timestamp_millis << "\t";
+    ss << kinematics->pose.position.x() << "\t" << kinematics->pose.position.y() << "\t" << kinematics->pose.position.z() << "\t";
+    ss << kinematics->pose.orientation.w() << "\t" << kinematics->pose.orientation.x() << "\t"
+        << kinematics->pose.orientation.y() << "\t" << kinematics->pose.orientation.z() << "\t";
+    ss << luminance_data.luminance << "\t";
+
+    return ss.str();
+
+}

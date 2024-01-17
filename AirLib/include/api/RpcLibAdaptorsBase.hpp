@@ -853,7 +853,7 @@ namespace airlib_rpclib
             msr::airlib::TTimePoint time_stamp;
             msr::airlib::real_T luminance;
 
-            MSGPACK_DEFINE_MAP(luminance);
+            MSGPACK_DEFINE_MAP(luminance, time_stamp);
 
             LuminanceSensorData() 
             {
@@ -867,6 +867,10 @@ namespace airlib_rpclib
             msr::airlib::LuminanceSensorData to() const
             {
                 msr::airlib::LuminanceSensorData d;
+
+                d.time_stamp = time_stamp;
+                d.luminance = luminance;
+
                 return d;
                 
             }

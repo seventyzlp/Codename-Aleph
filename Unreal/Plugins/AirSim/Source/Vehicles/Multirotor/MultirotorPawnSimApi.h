@@ -46,6 +46,9 @@ public:
     virtual void setKinematics(const Kinematics::State& state, bool ignore_collision) override;
     virtual void pawnTick(float dt) override;
 
+    // record the datas
+    virtual std::string getRecordFileLine(bool is_header_line) const override;
+
     msr::airlib::MultirotorApiBase* getVehicleApi() const
     {
         return vehicle_api_.get();
