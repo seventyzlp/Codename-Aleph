@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 #include "UnrealSensorFactory.h"
+
+#include "UnrealSensors/UnrealLuminanceSensor.h"
 #include "UnrealSensors/UnrealDistanceSensor.h"
 #include "UnrealSensors/UnrealLidarSensor.h"
 
@@ -21,6 +23,9 @@ std::shared_ptr<msr::airlib::SensorBase> UnrealSensorFactory::createSensorFromSe
     case SensorBase::SensorType::Lidar:
         return std::shared_ptr<UnrealLidarSensor>(new UnrealLidarSensor(
             *static_cast<const AirSimSettings::LidarSetting*>(sensor_setting), actor_, ned_transform_));
+    case SensorBase::SensorType::Luminance:
+        return std::shared_ptr<UnrealLuminanceSensor>(new UnrealLuminanceSensor(
+            *static_cast<const AirSimSettings::LuminanceSetting*>(sensor_setting), actor_, ned_transform_));
     default:
         return msr::airlib::SensorFactory::createSensorFromSettings(sensor_setting);
     }

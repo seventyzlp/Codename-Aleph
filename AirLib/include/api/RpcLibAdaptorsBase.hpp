@@ -848,6 +848,30 @@ namespace airlib_rpclib
             }
         };
 
+        struct LuminanceSensorData
+        {
+            msr::airlib::TTimePoint time_stamp;
+            msr::airlib::real_T luminance;
+
+            MSGPACK_DEFINE_MAP(luminance);
+
+            LuminanceSensorData() 
+            {
+            }
+
+            LuminanceSensorData(const msr::airlib::LuminanceSensorData& s) {
+                time_stamp = s.time_stamp;
+                luminance = s.luminance;
+            }
+
+            msr::airlib::LuminanceSensorData to() const
+            {
+                msr::airlib::LuminanceSensorData d;
+                return d;
+                
+            }
+        };
+
         struct MeshPositionVertexBuffersResponse
         {
             Vector3r position;

@@ -314,6 +314,11 @@ namespace airlib
             return RpcLibAdaptorsBase::ImuData(imu_data);
         });
 
+        pimpl_->server.bind("getLuminanceSensorData", [&](const std::string& luminance_sensor_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::LuminanceSensorData {
+            const auto& luminanceSensorData = getVehicleApi(vehicle_name)->getLuminanceSensorData(luminance_sensor_name);
+            return RpcLibAdaptorsBase::LuminanceSensorData(luminanceSensorData);
+        });
+
         pimpl_->server.bind("getBarometerData", [&](const std::string& barometer_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::BarometerData {
             const auto& barometer_data = getVehicleApi(vehicle_name)->getBarometerData(barometer_name);
             return RpcLibAdaptorsBase::BarometerData(barometer_data);

@@ -21,6 +21,8 @@
 #include <exception>
 #include <string>
 
+#include "sensors/luminance/LuminanceBase.hpp"
+
 namespace msr
 {
 namespace airlib
@@ -171,6 +173,15 @@ Some methods may not be applicable to specific vehicle in which case an exceptio
                 throw VehicleControllerException(Utils::stringf("No distance sensor with name %s exist on vehicle", distance_sensor_name.c_str()));
 
             return distance_sensor->getOutput();
+        }
+
+        // Luminance Sensor API
+        virtual const LuminanceSensorData& getLuminanceSensorData(const std::string& luminance_sensor_name) const
+        {
+            auto* luminance_sensor = static_cast<const LuminanceBase*>(findSensorByName(luminance_sensor_name, SensorBase::SensorType::Luminance));
+            if (luminance_sensor == nullptr)
+                throw VehicleControllerException(Utils::stringf("No Luminance sensor with name %s exist on vehicle", luminance_sensor_name.c_str()));
+            return luminance_sensor->getOutput();
         }
 
         virtual ~VehicleApiBase() = default;

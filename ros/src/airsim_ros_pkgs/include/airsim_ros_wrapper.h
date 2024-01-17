@@ -47,6 +47,7 @@ STRICT_MODE_OFF //todo what does this do?
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/image_encodings.h>
 #include <sensor_msgs/Imu.h>
+#include <sensor_msgs/Illuminance.h> // add on luminance sensor
 #include <sensor_msgs/NavSatFix.h>
 #include <airsim_ros_pkgs/Altimeter.h> //hector_uav_msgs defunct?
 #include <sensor_msgs/MagneticField.h>

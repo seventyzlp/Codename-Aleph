@@ -274,6 +274,11 @@ void AirsimROSWrapper::create_ros_pubs_from_settings_json()
                     sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::PointCloud2>(curr_vehicle_name + "/lidar/" + sensor_name, 10);
                     break;
                 }
+                case SensorBase::SensorType::Luminance: {
+                    ROS_INFO_STREAM(sensor_name << ": Luminance Sensor");
+                    sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::Illuminance>(curr_vehicle_name + "/luminance/" + sensor_name, 10);
+                    break;
+                }
                 default: {
                     throw std::invalid_argument("Unexpected sensor type");
                 }

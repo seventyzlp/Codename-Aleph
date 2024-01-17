@@ -86,6 +86,9 @@ int main()
                   << "gps_data.gnss.velocity \t" << gps_data.gnss.velocity << std::endl
                   << "gps_data.gnss.fix_type \t" << gps_data.gnss.fix_type << std::endl;
 
+        auto luminance_data = client.getLuminanceSensorData();
+        std::cout << luminance_data.luminance << std::endl;
+
         auto magnetometer_data = client.getMagnetometerData();
         std::cout << "Magnetometer data \n"
                   << "magnetometer_data.time_stamp \t" << magnetometer_data.time_stamp << std::endl

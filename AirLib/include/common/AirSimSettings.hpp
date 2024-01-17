@@ -259,6 +259,10 @@ namespace airlib
             };
         };
 
+        struct LuminanceSetting : SensorSetting
+        {
+        };
+
         struct VehicleSetting
         {
             //required
@@ -1308,6 +1312,9 @@ namespace airlib
             case SensorBase::SensorType::Lidar:
                 sensor_setting = std::shared_ptr<SensorSetting>(new LidarSetting());
                 break;
+            case SensorBase::SensorType::Luminance:
+                sensor_setting = std::shared_ptr<SensorSetting>(new LuminanceSetting());
+                break;
             default:
                 throw std::invalid_argument("Unexpected sensor type");
             }
@@ -1376,6 +1383,7 @@ namespace airlib
                 sensors["magnetometer"] = createSensorSetting(SensorBase::SensorType::Magnetometer, "magnetometer", true);
                 sensors["gps"] = createSensorSetting(SensorBase::SensorType::Gps, "gps", true);
                 sensors["barometer"] = createSensorSetting(SensorBase::SensorType::Barometer, "barometer", true);
+                sensors["luminance"] = createSensorSetting(SensorBase::SensorType::Luminance, "luminance", true); // set luminance sensor as default sensor 
             }
             else if (simmode_name == kSimModeTypeCar) {
                 sensors["gps"] = createSensorSetting(SensorBase::SensorType::Gps, "gps", true);

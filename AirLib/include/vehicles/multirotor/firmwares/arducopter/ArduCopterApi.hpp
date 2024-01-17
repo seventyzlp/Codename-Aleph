@@ -20,6 +20,7 @@
 #include "sensors/barometer/BarometerBase.hpp"
 #include "sensors/distance/DistanceSimple.hpp"
 #include "sensors/lidar/LidarSimple.hpp"
+#include "sensors/luminance/LuminanceSimple.hpp"
 
 #include "UdpSocket.hpp"
 
@@ -437,6 +438,17 @@ namespace airlib
                 }
 
                 // Close JSON array & element
+                buf << "]}";
+            }
+
+            // send Luminance Sensor Data
+            const uint count_luminance_sensors = sensors_->size(SensorBase::SensorType::Luminance);
+            if (count_luminance_sensors != 0) {
+                buf << ","
+                    "\"Luminance\":{"
+                    "\"LuminanceData\":[";
+                const auto& luminance_output = getLuminanceSensorData("");
+                buf << luminance_output.luminance <<",";
                 buf << "]}";
             }
 

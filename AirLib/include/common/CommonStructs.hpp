@@ -399,6 +399,15 @@ namespace airlib
         }
     };
 
+    struct LuminanceSensorData
+    {
+        float luminance = 0;
+        TTimePoint time_stamp = 0;
+        LuminanceSensorData()
+        {
+        }
+    };
+
     struct DistanceSensorData
     {
         TTimePoint time_stamp;
