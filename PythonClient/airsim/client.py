@@ -918,6 +918,9 @@ class VehicleClient:
         """
         logging.warning("simGetLidarSegmentation API is deprecated, use getLidarData() API instead")
         return self.getLidarData(lidar_name, vehicle_name).segmentation
+    
+    def getLuminanceSensorData(self, luminance_sensor_name = '', vehicle_name = ''):
+        return LuminanceSensorData.from_msgpack(self.client.call('getLuminanceSensorData', luminance_sensor_name, vehicle_name))
 
 #Plotting APIs
     def simFlushPersistentMarkers(self):

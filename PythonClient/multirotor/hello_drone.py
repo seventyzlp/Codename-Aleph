@@ -28,6 +28,10 @@ magnetometer_data = client.getMagnetometerData()
 s = pprint.pformat(magnetometer_data)
 print("magnetometer_data: %s" % s)
 
+luminance_data = client.getLuminanceSensorData()
+s = pprint.pformat(luminance_data)
+print("luminance_data: %s" % s)
+
 gps_data = client.getGpsData()
 s = pprint.pformat(gps_data)
 print("gps_data: %s" % s)

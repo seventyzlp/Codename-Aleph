@@ -463,6 +463,10 @@ class DistanceSensorData(MsgpackMixin):
     max_distance = 0.0
     relative_pose = Pose()
 
+class LuminanceSensorData(MsgpackMixin):
+    time_stamp = np.uint64(0)
+    luminance = 0.0
+
 class Box2D(MsgpackMixin):
     min = Vector2r()
     max = Vector2r()

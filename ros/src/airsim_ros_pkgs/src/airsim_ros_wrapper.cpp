@@ -889,6 +889,15 @@ sensor_msgs::Imu AirsimROSWrapper::get_imu_msg_from_airsim(const msr::airlib::Im
     return imu_msg;
 }
 
+sensor_msgs::Illuminance AirsimROSWrapper::get_luminance_msg_from_airsim(const msr::airlib::LuminanceSensorData& luminance_data) const
+{
+    sensor_msgs::Illuminance luminance_msg;
+    luminance_msg.header.stamp = airsim_timestamp_to_ros(luminance_data.time_stamp);
+    luminance_msg.illuminance = luminance_data.luminance;
+    
+    return luminance_msg;
+}
+
 void AirsimROSWrapper::publish_odom_tf(const nav_msgs::Odometry& odom_msg)
 {
     geometry_msgs::TransformStamped odom_tf;
@@ -1121,6 +1130,13 @@ void AirsimROSWrapper::publish_vehicle_state()
                 sensor_msgs::MagneticField mag_msg = get_mag_msg_from_airsim(mag_data);
                 mag_msg.header.frame_id = vehicle_ros->vehicle_name;
                 sensor_publisher.publisher.publish(mag_msg);
+                break;
+            }
+            case SensorBase::SensorType::Luminance: {
+                auto luminance_data = airsim_client_->getLuminanceSensorData(sensor_publisher.sensor_name, vehicle_ros->vehicle_name);
+                sensor_msgs::Illuminance luminance_msg = get_luminance_msg_from_airsim(luminance_data);
+                luminance_msg.header.frame_id = vehicle_ros->vehicle_name;
+                sensor_publisher.publisher.publish(luminance_msg);
                 break;
             }
             }
