@@ -107,6 +107,15 @@ namespace airlib
         msr::airlib::GpsBase::Output getGpsData(const std::string& gps_name = "", const std::string& vehicle_name = "") const;
         msr::airlib::DistanceSensorData getDistanceSensorData(const std::string& distance_sensor_name = "", const std::string& vehicle_name = "") const;
         msr::airlib::LuminanceSensorData getLuminanceSensorData(const std::string& luminance_sensor_name = "", const std::string& vehicle_name ="") const;
+        msr::airlib::TemperatureSensorData getTemperatureSensorData(const std::string& temperature_sensor_name = "", const std::string& vehicle_name = "") const;
+        msr::airlib::HumiditySensorData getHumiditySensorData(const std::string& humidity_sensor_name = "", const std::string& vehicle_name = "") const;
+        msr::airlib::HeightSensorData getHeightSensorData(const std::string& height_sensor_name = "", const std::string& vehicle_name = "") const;
+        msr::airlib::AltitudeSensorData getAltitudeSensorData(const std::string& altitude_sensor_name = "", const std::string& vehicle_name = "") const;
+        msr::airlib::FumeSensorData getFumeSensorData(const std::string& fume_sensor_name = "", const std::string& vehicle_name = "") const;
+
+
+
+
         
         Pose simGetVehiclePose(const std::string& vehicle_name = "") const;
         void simSetVehiclePose(const Pose& pose, bool ignore_collision, const std::string& vehicle_name = "");

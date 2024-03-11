@@ -319,6 +319,31 @@ namespace airlib
             return RpcLibAdaptorsBase::LuminanceSensorData(luminanceSensorData);
         });
 
+        pimpl_->server.bind("getTemperatureSensorData", [&](const std::string& temperature_sensor_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::TemperatureSensorData {
+            const auto& temperatureSensorData = getVehicleApi(vehicle_name)->getTemperatureSensorData(temperature_sensor_name);
+            return RpcLibAdaptorsBase::TemperatureSensorData(temperatureSensorData);
+        });
+
+        pimpl_->server.bind("getHumiditySensorData", [&](const std::string& humidity_sensor_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::HumiditySensorData {
+            const auto& humiditySensorData = getVehicleApi(vehicle_name)->getHumiditySensorData(humidity_sensor_name);
+            return RpcLibAdaptorsBase::HumiditySensorData(humiditySensorData);
+        });
+
+        pimpl_->server.bind("getHeightSensorData", [&](const std::string& height_sensor_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::HeightSensorData {
+            const auto& heightSensorData = getVehicleApi(vehicle_name)->getHeightSensorData(height_sensor_name);
+            return RpcLibAdaptorsBase::HeightSensorData(heightSensorData);
+        });
+
+        pimpl_->server.bind("getAltitudeSensorData", [&](const std::string& altitude_sensor_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::AltitudeSensorData {
+            const auto& altitudeSensorData = getVehicleApi(vehicle_name)->getAltitudeSensorData(altitude_sensor_name);
+            return RpcLibAdaptorsBase::AltitudeSensorData(altitudeSensorData);
+        });
+
+        pimpl_->server.bind("getFumeSensorData", [&](const std::string& fume_sensor_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::FumeSensorData {
+            const auto& fumeSensorData = getVehicleApi(vehicle_name)->getFumeSensorData(fume_sensor_name);
+            return RpcLibAdaptorsBase::FumeSensorData(fumeSensorData);
+        });
+
         pimpl_->server.bind("getBarometerData", [&](const std::string& barometer_name, const std::string& vehicle_name) -> RpcLibAdaptorsBase::BarometerData {
             const auto& barometer_data = getVehicleApi(vehicle_name)->getBarometerData(barometer_name);
             return RpcLibAdaptorsBase::BarometerData(barometer_data);

@@ -22,6 +22,12 @@
 #include <string>
 
 #include "sensors/luminance/LuminanceBase.hpp"
+#include "sensors/temperature/TemperatureBase.hpp"
+#include "sensors/humidity/HumidityBase.hpp"
+#include "sensors/height/HeightBase.hpp"
+#include "sensors/altitude/AltitudeBase.hpp"
+#include "sensors/fume/FumeBase.hpp"
+
 
 namespace msr
 {
@@ -183,6 +189,54 @@ Some methods may not be applicable to specific vehicle in which case an exceptio
                 throw VehicleControllerException(Utils::stringf("No Luminance sensor with name %s exist on vehicle", luminance_sensor_name.c_str()));
             return luminance_sensor->getOutput();
         }
+
+        // Temperature Sensor API
+        virtual const TemperatureSensorData& getTemperatureSensorData(const std::string& temperature_sensor_name) const
+        {
+            auto* temperature_sensor = static_cast<const TemperatureBase*>(findSensorByName(temperature_sensor_name, SensorBase::SensorType::Temperature));
+            if (temperature_sensor == nullptr)
+                throw VehicleControllerException(Utils::stringf("No Temperature sensor with name %s exist on vehicle", temperature_sensor_name.c_str()));
+            return temperature_sensor->getOutput();
+        }
+
+        // Humidity Sensor API
+        virtual const HumiditySensorData& getHumiditySensorData(const std::string& humidity_sensor_name) const
+        {
+            auto* humidity_sensor = static_cast<const HumidityBase*>(findSensorByName(humidity_sensor_name, SensorBase::SensorType::Humidity));
+            if (humidity_sensor == nullptr)
+                throw VehicleControllerException(Utils::stringf("No Humidity sensor with name %s exist on vehicle", humidity_sensor_name.c_str()));
+            return humidity_sensor->getOutput();
+        }
+
+        // Height Sensor API
+        virtual const HeightSensorData& getHeightSensorData(const std::string& height_sensor_name) const
+        {
+            auto* height_sensor = static_cast<const HeightBase*>(findSensorByName(height_sensor_name, SensorBase::SensorType::Height));
+            if (height_sensor == nullptr)
+                throw VehicleControllerException(Utils::stringf("No Height sensor with name %s exist on vehicle", height_sensor_name.c_str()));
+            return height_sensor->getOutput();
+        }
+
+        // Altitude Sensor API
+        virtual const AltitudeSensorData& getAltitudeSensorData(const std::string& altitude_sensor_name) const
+        {
+            auto* altitude_sensor = static_cast<const AltitudeBase*>(findSensorByName(altitude_sensor_name, SensorBase::SensorType::Altitude));
+            if (altitude_sensor == nullptr)
+                throw VehicleControllerException(Utils::stringf("No Altitude sensor with name %s exist on vehicle", altitude_sensor_name.c_str()));
+            return altitude_sensor->getOutput();
+        }
+
+        // Fume Sensor API
+        virtual const FumeSensorData& getFumeSensorData(const std::string& fume_sensor_name) const
+        {
+            
+            auto* fume_sensor = static_cast<const FumeBase*>(findSensorByName(fume_sensor_name, SensorBase::SensorType::Fume));
+            if (fume_sensor == nullptr)
+                throw VehicleControllerException(Utils::stringf("No Fume sensor with name %s exist on vehicle", fume_sensor_name.c_str()));
+            return fume_sensor->getOutput();
+        }
+
+
 
         virtual ~VehicleApiBase() = default;
 

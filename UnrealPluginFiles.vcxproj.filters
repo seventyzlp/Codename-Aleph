@@ -221,6 +221,9 @@
     <ClInclude Include="Unreal\Plugins\AirSim\Source\UnrealSensors\UnrealLuminanceSensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Unreal\Plugins\AirSim\Source\UnrealSensors\UnrealTemperatureSensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Unreal\Plugins\AirSim\Source\AirSim.Build.4.15.cs">

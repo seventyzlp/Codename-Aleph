@@ -11,6 +11,9 @@
 
 
 
+
+class NedTransform;
+
 class UnrealLuminanceSensor : public msr::airlib::LuminanceSimple
 {
 public:
@@ -27,5 +30,5 @@ private:
 	float luminancevalue_;
 
 	AActor* LuminanceCamera;
-	FIntProperty* lumproperty;
+	FDoubleProperty* lumproperty;
 };

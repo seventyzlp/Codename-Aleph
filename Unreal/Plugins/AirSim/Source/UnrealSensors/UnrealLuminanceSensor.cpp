@@ -1,12 +1,11 @@
 ﻿#include "UnrealLuminanceSensor.h"
 
 
-
 float UnrealLuminanceSensor::getLuminance()
 {
-	// get luminance form actor detector
-	luminancevalue_ = lumproperty->GetPropertyValue_InContainer(LuminanceCamera);
-	return luminancevalue_;
+    // get luminance form actor detector
+    luminancevalue_ = lumproperty->GetPropertyValue_InContainer(LuminanceCamera);
+    return luminancevalue_;
 }
 
 UnrealLuminanceSensor::UnrealLuminanceSensor(const AirSimSettings::LuminanceSetting& setting,
@@ -18,6 +17,6 @@ UnrealLuminanceSensor::UnrealLuminanceSensor(const AirSimSettings::LuminanceSett
 	UGameplayStatics::GetAllActorsWithTag(pos, TEXT("LuminanceSensor"), LuminanceCameras); // get actor from tag
 
 	LuminanceCamera = LuminanceCameras[0];
-	lumproperty = FindFieldChecked<FIntProperty>(LuminanceCamera->GetClass(), "Luminance"); // imposible to refresh the actor when update
-	luminancevalue_ = lumproperty->GetPropertyValue_InContainer(LuminanceCamera);
+	lumproperty = FindFieldChecked<FDoubleProperty>(LuminanceCamera->GetClass(), "Luminance"); // imposible to refresh the actor when update
+        luminancevalue_ = lumproperty->GetPropertyValue_InContainer(LuminanceCamera);
 }

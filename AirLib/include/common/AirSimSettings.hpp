@@ -263,6 +263,26 @@ namespace airlib
         {
         };
 
+        struct TemperatureSetting : SensorSetting
+        {
+        };
+
+        struct HumiditySetting : SensorSetting
+        {
+        };
+
+        struct HeightSetting : SensorSetting
+        {
+        };
+
+        struct AltitudeSetting : SensorSetting
+        {
+        };
+
+        struct FumeSetting : SensorSetting
+        {
+        };
+
         struct VehicleSetting
         {
             //required
@@ -1315,6 +1335,22 @@ namespace airlib
             case SensorBase::SensorType::Luminance:
                 sensor_setting = std::shared_ptr<SensorSetting>(new LuminanceSetting());
                 break;
+            case SensorBase::SensorType::Temperature:
+                sensor_setting = std::shared_ptr<SensorSetting>(new TemperatureSetting());
+                break;
+            case SensorBase::SensorType::Humidity:
+                sensor_setting = std::shared_ptr<SensorSetting>(new HumiditySetting());
+                break;    
+            case SensorBase::SensorType::Height:
+                sensor_setting = std::shared_ptr<SensorSetting>(new HeightSetting());
+                break;    
+            case SensorBase::SensorType::Altitude:
+                sensor_setting = std::shared_ptr<SensorSetting>(new AltitudeSetting());
+                break;    
+            case SensorBase::SensorType::Fume:
+                sensor_setting = std::shared_ptr<SensorSetting>(new FumeSetting());
+                break;  
+
             default:
                 throw std::invalid_argument("Unexpected sensor type");
             }
@@ -1384,6 +1420,12 @@ namespace airlib
                 sensors["gps"] = createSensorSetting(SensorBase::SensorType::Gps, "gps", true);
                 sensors["barometer"] = createSensorSetting(SensorBase::SensorType::Barometer, "barometer", true);
                 sensors["luminance"] = createSensorSetting(SensorBase::SensorType::Luminance, "luminance", true); // set luminance sensor as default sensor 
+                sensors["temperature"] = createSensorSetting(SensorBase::SensorType::Temperature, "temperature", true); // set temperature sensor as default sensor
+                sensors["humidity"] = createSensorSetting(SensorBase::SensorType::Humidity, "humidity", true); // set humidity sensor as default sensor
+                sensors["height"] = createSensorSetting(SensorBase::SensorType::Height, "height", true); // set height sensor as default sensor
+                sensors["altitude"] = createSensorSetting(SensorBase::SensorType::Altitude, "altitude", true); // set altitudes sensor as default sensor
+                sensors["fume"] = createSensorSetting(SensorBase::SensorType::Fume, "fume", true); // set fume sensor as default sensor
+
             }
             else if (simmode_name == kSimModeTypeCar) {
                 sensors["gps"] = createSensorSetting(SensorBase::SensorType::Gps, "gps", true);

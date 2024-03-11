@@ -90,7 +90,20 @@
     <ClInclude Include="include\common\common_utils\AsyncTasker.hpp" />
     <ClInclude Include="include\common\ImageCaptureBase.hpp" />
     <ClInclude Include="include\api\VehicleConnectorBase.hpp" />
+    <ClInclude Include="include\sensors\altitude\AltitudeBase.hpp" />
+    <ClInclude Include="include\sensors\altitude\AltitudeSimple.hpp" />
+    <ClInclude Include="include\sensors\fume\FumeBase.hpp" />
+    <ClInclude Include="include\sensors\fume\FumeSimple.hpp" />
+    <ClInclude Include="include\sensors\height\HeightBase.hpp" />
+    <ClInclude Include="include\sensors\height\HeightSimple.hpp" />
+    <ClInclude Include="include\sensors\height\HeightSimpleParams.hpp" />
+    <ClInclude Include="include\sensors\humidity\HumidityBase.hpp" />
+    <ClInclude Include="include\sensors\humidity\HumiditySimple.hpp" />
+    <ClInclude Include="include\sensors\humidity\HumiditySimpleParams.hpp" />
     <ClInclude Include="include\sensors\SensorFactory.hpp" />
+    <ClInclude Include="include\sensors\temperature\TemperatureBase.hpp" />
+    <ClInclude Include="include\sensors\temperature\TemperatureSimple.hpp" />
+    <ClInclude Include="include\sensors\temperature\TemperatureSimpleParams.hpp" />
     <ClInclude Include="include\vehicles\car\api\CarApiBase.hpp" />
     <ClInclude Include="include\vehicles\multirotor\api\MultirotorCommon.hpp" />
     <ClInclude Include="include\vehicles\multirotor\api\MultirotorRpcLibAdaptors.hpp" />
@@ -180,6 +193,8 @@
     <ClInclude Include="include\vehicles\multirotor\RotorParams.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\sensors\altitude\AltitudeSimpleParams.hpp" />
+    <ClCompile Include="include\sensors\fume\FumeSimpleParams.hpp" />
     <ClCompile Include="src\api\RpcLibClientBase.cpp" />
     <ClCompile Include="src\api\RpcLibServerBase.cpp" />
     <ClCompile Include="src\vehicles\multirotor\api\MultirotorApiBase.cpp" />
