@@ -408,6 +408,52 @@ namespace airlib
         }
     };
 
+    struct TemperatureSensorData
+    {
+        float temperature = 0;
+        TTimePoint time_stamp = 0;
+        TemperatureSensorData()
+        {
+        }
+    };
+
+    struct HumiditySensorData
+    {
+        float humidity = 0;
+        TTimePoint time_stamp = 0;
+        HumiditySensorData()
+        {
+        }
+    };
+
+    struct HeightSensorData
+    {
+        float height = 0;
+        TTimePoint time_stamp = 0;
+        HeightSensorData()
+        {
+        }
+    };
+
+    struct AltitudeSensorData
+    {
+        float altitude = 0;
+        TTimePoint time_stamp = 0;
+        AltitudeSensorData()
+        {
+        }
+    };
+
+    struct FumeSensorData
+    {
+        float fume = 0;
+        TTimePoint time_stamp = 0;
+        FumeSensorData()
+        {
+        }
+    };      
+
+
     struct DistanceSensorData
     {
         TTimePoint time_stamp;

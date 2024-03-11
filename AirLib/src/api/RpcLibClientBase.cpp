@@ -208,6 +208,7 @@ __pragma(warning(disable : 4239))
         {
             return pimpl_->client.call("getLuminanceSensorData", luminance_sensor_name, vehicle_name).as<RpcLibAdaptorsBase::LuminanceSensorData>().to();
         }
+
         
         bool RpcLibClientBase::simSetSegmentationObjectID(const std::string& mesh_name, int object_id, bool is_name_regex)
         {

@@ -876,6 +876,147 @@ namespace airlib_rpclib
             }
         };
 
+    struct TemperatureSensorData
+        {
+            msr::airlib::TTimePoint time_stamp;
+            msr::airlib::real_T temperature;
+
+            MSGPACK_DEFINE_MAP(temperature, time_stamp);
+
+            TemperatureSensorData()
+            {
+            }
+
+            TemperatureSensorData(const msr::airlib::TemperatureSensorData& s)
+            {
+                time_stamp = s.time_stamp;
+                temperature = s.temperature;
+            }
+
+            msr::airlib::TemperatureSensorData to() const
+            {
+                msr::airlib::TemperatureSensorData d;
+
+                d.time_stamp = time_stamp;
+                d.temperature = temperature;
+
+                return d;
+            }
+        };
+
+    struct HumiditySensorData
+        {
+            msr::airlib::TTimePoint time_stamp;
+            msr::airlib::real_T humidity;
+
+            MSGPACK_DEFINE_MAP(humidity, time_stamp);
+
+            HumiditySensorData()
+            {
+            }
+
+            HumiditySensorData(const msr::airlib::HumiditySensorData& s)
+            {
+                time_stamp = s.time_stamp;
+                humidity = s.humidity;
+            }
+
+            msr::airlib::HumiditySensorData to() const
+            {
+                msr::airlib::HumiditySensorData d;
+
+                d.time_stamp = time_stamp;
+                d.humidity = humidity;
+
+                return d;
+            }
+        };
+
+    struct HeightSensorData
+        {
+            msr::airlib::TTimePoint time_stamp;
+            msr::airlib::real_T height;
+
+            MSGPACK_DEFINE_MAP(height, time_stamp);
+
+            HeightSensorData()
+            {
+            }
+
+            HeightSensorData(const msr::airlib::HeightSensorData& s)
+            {
+                time_stamp = s.time_stamp;
+                height = s.height;
+            }
+
+            msr::airlib::HeightSensorData to() const
+            {
+                msr::airlib::HeightSensorData d;
+
+                d.time_stamp = time_stamp;
+                d.height = height;
+
+                return d;
+            }
+        };
+
+        struct AltitudeSensorData
+        {
+            msr::airlib::TTimePoint time_stamp;
+            msr::airlib::real_T altitude;
+
+            MSGPACK_DEFINE_MAP(altitude, time_stamp);
+
+            AltitudeSensorData()
+            {
+            }
+
+            AltitudeSensorData(const msr::airlib::AltitudeSensorData& s)
+            {
+                time_stamp = s.time_stamp;
+                altitude = s.altitude;
+            }
+
+            msr::airlib::AltitudeSensorData to() const
+            {
+                msr::airlib::AltitudeSensorData d;
+
+                d.time_stamp = time_stamp;
+                d.altitude = altitude;
+
+                return d;
+            }
+        };
+
+    struct FumeSensorData
+        {
+            msr::airlib::TTimePoint time_stamp;
+            msr::airlib::real_T fume;
+
+            MSGPACK_DEFINE_MAP(fume, time_stamp);
+
+            FumeSensorData()
+            {
+            }
+
+            FumeSensorData(const msr::airlib::FumeSensorData& s)
+            {
+                time_stamp = s.time_stamp;
+                fume = s.fume;
+            }
+
+            msr::airlib::FumeSensorData to() const
+            {
+                msr::airlib::FumeSensorData d;
+
+                d.time_stamp = time_stamp;
+                d.fume = fume;
+
+                return d;
+            }
+        };
+
+
         struct MeshPositionVertexBuffersResponse
         {
             Vector3r position;

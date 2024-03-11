@@ -188,11 +188,17 @@ std::string MultirotorPawnSimApi::getRecordFileLine(bool is_header_line) const
 {
     std::string common_line = PawnSimApi::getRecordFileLine(is_header_line);
     if (is_header_line) {
-        return "VehicleName\tTimeStamp\tPOS_X\tPOS_Y\tPOS_Z\tQ_W\tQ_X\tQ_Y\tQ_Z\tLuminance\t";
+        return "VehicleName\tTimeStamp\tPOS_X\tPOS_Y\tPOS_Z\tQ_W\tQ_X\tQ_Y\tQ_Z\tLuminance\tTemperature\tHumidity\tHeight\tAltitude\tFume";
     }
     const auto* kinematics = getGroundTruthKinematics();
     const uint64_t timestamp_millis = static_cast<uint64_t>(clock()->nowNanos() / 1.0E6);
     const auto& luminance_data = vehicle_api_->getLuminanceSensorData("");
+    const auto& temperature_data = vehicle_api_->getTemperatureSensorData("");
+    const auto& humidity_data = vehicle_api_->getHumiditySensorData("");
+    const auto& height_data = vehicle_api_->getHeightSensorData("");
+    const auto& altitude_data = vehicle_api_->getAltitudeSensorData("");
+    const auto& fume_data = vehicle_api_->getFumeSensorData("");
+    
 
     std::ostringstream ss;
     ss << getVehicleName() << "\t";
@@ -201,6 +207,11 @@ std::string MultirotorPawnSimApi::getRecordFileLine(bool is_header_line) const
     ss << kinematics->pose.orientation.w() << "\t" << kinematics->pose.orientation.x() << "\t"
         << kinematics->pose.orientation.y() << "\t" << kinematics->pose.orientation.z() << "\t";
     ss << luminance_data.luminance << "\t";
+    ss << temperature_data.temperature << "\t";
+    ss << humidity_data.humidity << "\t";
+    ss << height_data.height << "\t";
+    ss << altitude_data.altitude << "\t";
+    ss << fume_data.fume << "\t";
 
     return ss.str();
 

@@ -32,6 +32,12 @@ namespace airlib
             Distance = 5,
             Lidar = 6,
             Luminance = 7,
+            Temperature = 8, 
+            Humidity = 9, // Humid level
+            Height = 10, // Distance from current ground
+            Altitude = 11, // Absolute height
+            Fume = 12, // level of smoke
+
         };
 
         SensorBase(const std::string& sensor_name = "")
