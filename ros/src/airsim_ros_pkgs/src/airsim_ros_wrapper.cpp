@@ -279,6 +279,32 @@ void AirsimROSWrapper::create_ros_pubs_from_settings_json()
                     sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::Illuminance>(curr_vehicle_name + "/luminance/" + sensor_name, 10);
                     break;
                 }
+                case SensorBase::SensorType::Temperature:{
+                    ROS_INFO_STREAM(sensor_name << ": Temperature Sensor");
+                    sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::Temperature>(curr_vehicle_name + "/temperature/" + sensor_name, 10);
+                    break;
+                }
+                case SensorBase::SensorType::Humidity:{
+                    ROS_INFO_STREAM(sensor_name << ": Relative Humidity Sensor");
+                    sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::RelativeHumidity>(curr_vehicle_name + "/relative_humidity/" + sensor_name, 10);
+                    break;
+                }
+                // at there we use the struct of luminance, but they are not same figures
+                case SensorBase::SensorType::Height:{
+                    ROS_INFO_STREAM(sensor_name << ": Height Sensor");
+                    sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::Illuminance>(curr_vehicle_name + "/height/" + sensor_name, 10);
+                    break;
+                }
+                case SensorBase::SensorType::Altitude:{
+                    ROS_INFO_STREAM(sensor_name << ": Altitude Sensor");
+                    sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::Illuminance>(curr_vehicle_name + "/altitude/" + sensor_name, 10);
+                    break;
+                }
+                case SensorBase::SensorType::Fume:{
+                    ROS_INFO_STREAM(sensor_name << ": Fume Sensor");
+                    sensor_publisher.publisher = nh_private_.advertise<sensor_msgs::Illuminance>(curr_vehicle_name + "/fume/" + sensor_name, 10);
+                    break;
+                }
                 default: {
                     throw std::invalid_argument("Unexpected sensor type");
                 }
@@ -889,6 +915,7 @@ sensor_msgs::Imu AirsimROSWrapper::get_imu_msg_from_airsim(const msr::airlib::Im
     return imu_msg;
 }
 
+// custom message start here
 sensor_msgs::Illuminance AirsimROSWrapper::get_luminance_msg_from_airsim(const msr::airlib::LuminanceSensorData& luminance_data) const
 {
     sensor_msgs::Illuminance luminance_msg;
@@ -896,6 +923,51 @@ sensor_msgs::Illuminance AirsimROSWrapper::get_luminance_msg_from_airsim(const m
     luminance_msg.illuminance = luminance_data.luminance;
     
     return luminance_msg;
+}
+
+sensor_msgs::Illuminance AirsimROSWrapper::get_altitude_msg_from_airsim(const msr::airlib::AltitudeSensorData& altitude_data) const
+{
+    sensor_msgs::Illuminance altitude_msg;
+    altitude_msg.header.stamp = airsim_timestamp_to_ros(altitude_data.time_stamp);
+    altitude_msg.illuminance = altitude_data.altitude;
+
+    return altitude_msg;
+}
+
+sensor_msgs::Temperature AirsimROSWrapper::get_temperature_msg_from_airsim(const msr::airlib::TemperatureSensorData& temperature_data) const
+{
+    sensor_msgs::Temperature temperature_msg;
+    temperature_msg.header.stamp = airsim_timestamp_to_ros(temperature_data.time_stamp);
+    temperature_msg.temperature = temperature_data.temperature;
+
+    return temperature_msg;
+}
+
+sensor_msgs::RelativeHumidity AirsimROSWrapper::get_relativehumidity_msg_from_airsim(const msr::airlib::HumiditySensorData& relative_humidity_data) const
+{
+    sensor_msgs::RelativeHumidity relative_humidity_msg;
+    relative_humidity_msg.header.stamp = airsim_timestamp_to_ros(relative_humidity_data.time_stamp);
+    relative_humidity_msg.relative_humidity = relative_humidity_data.humidity;
+
+    return relative_humidity_msg;
+}
+
+sensor_msgs::Illuminance AirsimROSWrapper::get_height_msg_from_airsim(const msr::airlib::HeightSensorData& height_data) const
+{
+    sensor_msgs::Illuminance height_msg;
+    height_msg.header.stamp = airsim_timestamp_to_ros(height_data.time_stamp);
+    height_msg.illuminance = height_data.height;
+
+    return height_msg;
+}
+
+sensor_msgs::RelativeHumidity AirsimROSWrapper::get_fume_msg_from_airsim(const msr::airlib::FumeSensorData& fume_data) const
+{
+    sensor_msgs::RelativeHumidity fume_msg;
+    fume_msg.header.stamp = airsim_timestamp_to_ros(fume_data.time_stamp);
+    fume_msg.relative_humidity = fume_data.fume;
+
+    return fume_msg;
 }
 
 void AirsimROSWrapper::publish_odom_tf(const nav_msgs::Odometry& odom_msg)
@@ -1139,10 +1211,45 @@ void AirsimROSWrapper::publish_vehicle_state()
                 sensor_publisher.publisher.publish(luminance_msg);
                 break;
             }
+            case SensorBase::SensorType::Humidity: {
+                auto humidity_data = airsim_client_->getHumiditySensorData(sensor_publisher.sensor_name, vehicle_ros->vehicle_name);
+                sensor_msgs::RelativeHumidity relative_humidity_msg = get_relativehumidity_msg_from_airsim(humidity_data);
+                relative_humidity_msg.header.frame_id = vehicle_ros->vehicle_name;
+                sensor_publisher.publisher.publish(relative_humidity_msg);
+                break;
             }
+            case SensorBase::SensorType::Temperature: {
+                auto temperature_data = airsim_client_->getTemperatureSensorData(sensor_publisher.sensor_name, vehicle_ros->vehicle_name);
+                sensor_msgs::Temperature temperature_msg = get_temperature_msg_from_airsim(temperature_data);
+                temperature_msg.header.frame_id = vehicle_ros->vehicle_name;
+                sensor_publisher.publisher.publish(temperature_msg);
+                break;
+            }
+            case SensorBase::SensorType::Height: {
+                auto height_data = airsim_client_->getHeightSensorData(sensor_publisher.sensor_name, vehicle_ros->vehicle_name);
+                sensor_msgs::Illuminance height_msg = get_height_msg_from_airsim(height_data);
+                height_msg.header.frame_id = vehicle_ros->vehicle_name;
+                sensor_publisher.publisher.publish(height_msg);
+                break;
+            }
+            case SensorBase::SensorType::Altitude: {
+                auto altitude_data = airsim_client_->getAltitudeSensorData(sensor_publisher.sensor_name, vehicle_ros->vehicle_name);
+                sensor_msgs::Illuminance altitude_msg = get_altitude_msg_from_airsim(altitude_data);
+                altitude_msg.header.frame_id = vehicle_ros->vehicle_name;
+                sensor_publisher.publisher.publish(altitude_msg);
+                break;
+            }
+            case SensorBase::SensorType::Fume: 
+            {
+                auto fume_data = airsim_client_->getFumeSensorData(sensor_publisher.sensor_name, vehicle_ros->vehicle_name);
+                sensor_msgs::RelativeHumidity fume_msg = get_fume_msg_from_airsim(fume_data);
+                fume_msg.header.frame_id = vehicle_ros->vehicle_name;
+                sensor_publisher.publisher.publish(fume_msg);
+                break;
+            }
+            }
+            update_and_publish_static_transforms(vehicle_ros.get());
         }
-
-        update_and_publish_static_transforms(vehicle_ros.get());
     }
 }
 

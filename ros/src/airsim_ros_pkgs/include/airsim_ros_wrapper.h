@@ -48,6 +48,8 @@ STRICT_MODE_OFF //todo what does this do?
 #include <sensor_msgs/image_encodings.h>
 #include <sensor_msgs/Imu.h>
 #include <sensor_msgs/Illuminance.h> // add on luminance sensor
+#include <sensor_msgs/Temperature.h>
+#include <sensor_msgs/RelativeHumidity.h>
 #include <sensor_msgs/NavSatFix.h>
 #include <airsim_ros_pkgs/Altimeter.h> //hector_uav_msgs defunct?
 #include <sensor_msgs/MagneticField.h>
@@ -290,7 +292,14 @@ private:
     airsim_ros_pkgs::Altimeter get_altimeter_msg_from_airsim(const msr::airlib::BarometerBase::Output& alt_data) const;
     sensor_msgs::Range get_range_from_airsim(const msr::airlib::DistanceSensorData& dist_data) const;
     sensor_msgs::PointCloud2 get_lidar_msg_from_airsim(const msr::airlib::LidarData& lidar_data, const std::string& vehicle_name, const std::string& sensor_name) const;
+
     sensor_msgs::Illuminance get_luminance_msg_from_airsim(const msr::airlib::LuminanceSensorData& luminance_data) const;
+    sensor_msgs::Illuminance get_altitude_msg_from_airsim(const msr::airlib::AltitudeSensorData& altitude_data) const;
+    sensor_msgs::Illuminance get_height_msg_from_airsim(const msr::airlib::HeightSensorData& height_data) const;
+    sensor_msgs::RelativeHumidity get_fume_msg_from_airsim(const msr::airlib::FumeSensorData& fume_data) const;
+
+    sensor_msgs::Temperature get_temperature_msg_from_airsim(const msr::airlib::TemperatureSensorData& temperature_data) const;
+    sensor_msgs::RelativeHumidity get_relativehumidity_msg_from_airsim(const msr::airlib::HumiditySensorData& relative_humidity_data) const;
     sensor_msgs::NavSatFix get_gps_msg_from_airsim(const msr::airlib::GpsBase::Output& gps_data) const;
     sensor_msgs::MagneticField get_mag_msg_from_airsim(const msr::airlib::MagnetometerBase::Output& mag_data) const;
     airsim_ros_pkgs::Environment get_environment_msg_from_airsim(const msr::airlib::Environment::State& env_data) const;

@@ -209,6 +209,30 @@ __pragma(warning(disable : 4239))
             return pimpl_->client.call("getLuminanceSensorData", luminance_sensor_name, vehicle_name).as<RpcLibAdaptorsBase::LuminanceSensorData>().to();
         }
 
+        msr::airlib::TemperatureSensorData RpcLibClientBase::getTemperatureSensorData(const std::string& temperature_sensor_name, const std::string& vehicle_name) const 
+        {
+            return pimpl_->client.call("getTemperatureSensorData", temperature_sensor_name, vehicle_name).as<RpcLibAdaptorsBase::TemperatureSensorData>().to();
+        }
+
+        msr::airlib::HumiditySensorData RpcLibClientBase::getHumiditySensorData(const std::string& humidity_sensor_name, const std::string& vehicle_name) const
+        {
+            return pimpl_->client.call("getHumiditySensorData", humidity_sensor_name, vehicle_name).as<RpcLibAdaptorsBase::HumiditySensorData>().to();
+        }
+
+        msr::airlib::HeightSensorData RpcLibClientBase::getHeightSensorData(const std::string& height_sensor_name, const std::string& vehicle_name) const
+        {
+            return pimpl_->client.call("getHeightSensorData", height_sensor_name, vehicle_name).as<RpcLibAdaptorsBase::HeightSensorData>().to();
+        }
+
+        msr::airlib::AltitudeSensorData RpcLibClientBase::getAltitudeSensorData(const std::string& alititude_sensor_name, const std::string& vehicle_name) const
+        {
+            return pimpl_->client.call("getAltitudeSensorData", alititude_sensor_name, vehicle_name).as<RpcLibAdaptorsBase::AltitudeSensorData>().to();
+        }
+
+        msr::airlib::FumeSensorData RpcLibClientBase::getFumeSensorData(const std::string& fume_sensor_name, const std::string& vehicle_name) const
+        {
+            return pimpl_->client.call("getFumeSensorData", fume_sensor_name, vehicle_name).as<RpcLibAdaptorsBase::FumeSensorData>().to();
+        }
         
         bool RpcLibClientBase::simSetSegmentationObjectID(const std::string& mesh_name, int object_id, bool is_name_regex)
         {
